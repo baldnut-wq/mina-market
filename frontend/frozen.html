@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Frozen Foods - Mina Market</title>
+  <meta name="description" content="Find a wide selection of frozen foods at Mina Market - frozen vegetables, meals, seafood, ice cream, and more." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+    <link rel="stylesheet" href="css-js/frozen.css">
+   
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Home">
+        <img src="./img/logoBIG.jpg" alt="Mina Market Logo" class="logo">
+        <h1>Mina Market <span style="color: rgb(187, 187, 22);" class="tag">Family Favorites</span></h1>
+      </a>
+      
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search frozen foods..." id="searchInput">
+        <button class="search-btn" aria-label="Search" id="searchBtn">
+          <i class="fas fa-search"></i>
+          <div class="db-status" id="dbStatus"></div>
+          <div class="db-tooltip" id="dbTooltip">search...</div>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <main class="container" role="main" aria-label="Frozen Foods">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+      <a href="categories.html">Categories</a>
+      <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+      <span>Frozen Foods</span>
+    </div>
+    
+    <!-- Category Header -->
+    <section class="category-header">
+      <h1>Frozen Foods</h1>
+      <p>Discover our wide selection of frozen foods - from vegetables and seafood to ready meals and desserts.</p>
+    </section>
+    
+    <!-- Special Offers Banner -->
+    <section class="special-offers">
+      <div class="offer-content">
+        <h2>Special Frozen Food Offers!</h2>
+        <p>Enjoy up to 30% off on selected frozen products. Stock up your freezer today!</p>
+        <a href="#products" class="btn btn-primary" style="background: white; color: var(--teal);">
+          Shop Now <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="offer-image">
+        <img src="./img/frozen-banner.jpg" alt="Frozen Foods Special Offer">
+      </div>
+    </section>
+    
+    <!-- Advanced Filter Section -->
+    <section class="filter-section">
+      <div class="filter-header" id="filterToggle">
+        <h2><i class="fas fa-filter"></i> Filter Products</h2>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="filter-content">
+        <div class="filter-group">
+          <h3>Price Range</h3>
+          <div class="price-range">
+            <input type="range" min="0" max="100" value="50" id="priceRange">
+            <div class="price-values">
+              <span>$0</span>
+              <span>$50</span>
+              <span>$100+</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Customer Rating</h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="rating5" class="rating-filter" value="5">
+              <label for="rating5">5 Stars</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="rating4" class="rating-filter" value="4">
+              <label for="rating4">4+ Stars</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="rating3" class="rating-filter" value="3">
+              <label for="rating3">3+ Stars</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Brand</h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="brand1" class="brand-filter" value="birds-eye">
+              <label for="brand1">Birds Eye</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand2" class="brand-filter" value="green-giant">
+              <label for="brand2">Green Giant</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand3" class="brand-filter" value="tyson">
+              <label for="brand3">Tyson</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand4" class="brand-filter" value="healthy-choice">
+              <label for="brand4">Healthy Choice</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand5" class="brand-filter" value="other">
+              <label for="brand5">Other Brands...</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Features</h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="feature1" class="feature-filter" value="organic">
+              <label for="feature1">Organic</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature2" class="feature-filter" value="gluten-free">
+              <label for="feature2">Gluten-Free</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature3" class="feature-filter" value="low-calorie">
+              <label for="feature3">Low Calorie</label>
+            </div>
+
+                <div class="filter-option">
+              <input type="checkbox" id="feature3" class="feature-filter" value="other">
+              <label for="feature3">Others...</label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Subcategories Navigation -->
+    <div class="subcategories">
+      <button class="subcategory-btn active" data-subcategory="all">
+        <i class="fas fa-star"></i> All Products
+      </button>
+      <button class="subcategory-btn" data-subcategory="vegetables">
+        <i class="fas fa-carrot"></i> Vegetables
+      </button>
+      <button class="subcategory-btn" data-subcategory="fruits">
+        <i class="fas fa-apple-alt"></i> Fruits & Berries
+      </button>
+      <button class="subcategory-btn" data-subcategory="seafood">
+        <i class="fas fa-fish"></i> Seafood
+      </button>
+      <button class="subcategory-btn" data-subcategory="meals">
+        <i class="fas fa-utensils"></i> Ready Meals
+      </button>
+      <button class="subcategory-btn" data-subcategory="desserts">
+        <i class="fas fa-ice-cream"></i> Ice Cream & Desserts
+      </button>
+    </div>
+    
+    <!-- Products Grid -->
+    <section class="products-grid" id="products">
+      <!-- Product cards will be populated by JavaScript -->
+    </section>
+    
+    <!-- Load More Button -->
+    <div class="load-more" id="loadMoreContainer" style="display: none;">
+      <button class="btn btn-primary" id="loadMoreBtn">
+        <i class="fas fa-plus"></i> Load More Products
+      </button>
+    </div>
+    
+    <!-- Recently Viewed Section -->
+    <section class="recently-viewed">
+      <div class="section-header">
+        <h2>Recently Viewed</h2>
+        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="recently-viewed-grid" id="recentlyViewed">
+        <!-- Recently viewed products will be populated by JavaScript -->
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h4>Mina Market</h4>
+          <p style="margin-bottom:20px;">Your local market for fresh produce, household essentials, and quality products at affordable prices.</p>
+          <div class="social-links">
+              <a href="https://www.tiktok.com/@mina.market0" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/minamarket._?igsh=cmQ1MmVqZjMxZjA3" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://maps.app.goo.gl/vWKGbzNEC5QxrnHU7" target="_blank"><i class="fa solid fa-location-dot"></i></a>
+            <a href="https://wa.me/+252633140000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="index.html#whats-new"><i class="fas fa-chevron-right"></i> What's New</a></li>
+            <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+            <li><a href="index.html#offers"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Frozen Foods</h4>
+          <ul>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Vegetables</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Fruits & Berries</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Seafood</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Ready Meals</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Ice Cream</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Newsletter</h4>
+          <p>Subscribe to get special offers and weekly updates</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Your email address">
+            <button class="btn btn-primary" style="width:100%;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <small>© <span id="year"></span> Mina Market. Built with <span class="heart">❤️</span> — ready to grow into e‑commerce later.</small>
+      </div>
+    </div>
+  </footer>
+  
+    <script src="css-js/frozen.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World of Swimming - Mina Market</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏊‍♂️</text></svg>">
+    <link rel="stylesheet" href="css-js/swimming.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container nav">
+            <a href="index.html" class="brand" aria-label="Home">
+                <img src="./img/logoBIG.jpg" alt="Mina Market Logo" class="logo">
+                <h1>Mina Market <span style="color: var(--aqua);" class="tag">Family Favorites</span></h1>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search swimwear, accessories, and more..." id="searchInput">
+                <button class="search-btn" aria-label="Search" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                    <div class="db-status" id="dbStatus"></div>
+                    <div class="db-tooltip" id="dbTooltip">Using local data</div>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container" role="main" aria-label="World of Swimming Products">
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+            <a href="categories.html">Categories</a>
+            <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+            <span>World of Swimming</span>
+        </div>
+        
+        <!-- Category Header -->
+        <section class="category-header">
+            <h1>World of Swimming</h1>
+            <p>Discover premium swimwear, accessories, and everything you need for the perfect swimming experience.</p>
+        </section>
+        
+        <!-- Special Offers Banner -->
+        <section class="special-offers">
+            <div class="offer-content">
+                <h2>Summer Swim Specials!</h2>
+                <br>
+                <a href="#products" class="btn btn-primary" style="background: white; color: var(--blue);">
+                    Shop Now <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="offer-image">
+                <img src="./img/swim-offer.jpg" alt="Swimming Special Offer">
+            </div>
+        </section>
+        
+        <!-- Advanced Filter Section -->
+        <section class="filter-section">
+            <div class="filter-header" id="filterToggle">
+                <h2><i class="fas fa-filter"></i> Filter Products</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="filter-content">
+                <div class="filter-group">
+                    <h3>Price Range</h3>
+                    <div class="price-range">
+                        <input type="range" min="0" max="100" value="50" id="priceRange">
+                        <div class="price-values">
+                            <span>$0</span>
+                            <span>$50</span>
+                            <span>$100+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Customer Rating</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="rating5" class="rating-filter" value="5">
+                            <label for="rating5">5 Stars</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="rating4" class="rating-filter" value="4">
+                            <label for="rating4">4+ Stars</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="rating3" class="rating-filter" value="3">
+                            <label for="rating3">3+ Stars</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Brand</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="brand1" class="brand-filter" value="speedo">
+                            <label for="brand1">Speedo</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="brand2" class="brand-filter" value="arena">
+                            <label for="brand2">Arena</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="brand3" class="brand-filter" value="tyr">
+                            <label for="brand3">TYR</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="brand4" class="brand-filter" value="nike">
+                            <label for="brand4">Nike Swim</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Features</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="feature1" class="feature-filter" value="chlorine-resistant">
+                            <label for="feature1">Chlorine Resistant</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="feature2" class="feature-filter" value="uv-protection">
+                            <label for="feature2">UV Protection</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="feature3" class="feature-filter" value="quick-dry">
+                            <label for="feature3">Quick Dry</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Subcategories Navigation -->
+        <div class="subcategories">
+            <button class="subcategory-btn active" data-subcategory="all">
+                <i class="fas fa-star"></i> All Products
+            </button>
+            <button class="subcategory-btn" data-subcategory="swimwear">
+                <i class="fas fa-female"></i> Swimwear
+            </button>
+            <button class="subcategory-btn" data-subcategory="accessories">
+                <i class="fas fa-swimmer"></i> Swim Accessories
+            </button>
+            <button class="subcategory-btn" data-subcategory="poolside">
+                <i class="fas fa-umbrella-beach"></i> Poolside Essentials
+            </button>
+            <button class="subcategory-btn" data-subcategory="pool">
+                <i class="fas fa-water"></i> Pool Essentials
+            </button>
+        </div>
+        
+        <!-- Products Grid -->
+        <section class="products-grid" id="products">
+            <!-- Product cards will be populated by JavaScript -->
+        </section>
+        
+        <!-- Load More Button -->
+        <div class="load-more" id="loadMoreContainer" style="display: none;">
+            <button class="btn btn-primary" id="loadMoreBtn">
+                <i class="fas fa-plus"></i> Load More Products
+            </button>
+        </div>
+        
+        <!-- Recently Viewed Section -->
+        <section class="recently-viewed">
+            <div class="section-header">
+                <h2>Recently Viewed</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="recently-viewed-grid" id="recentlyViewed">
+                <!-- Recently viewed products will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Mina Market</h4>
+                    <p style="margin-bottom:20px;">Your local market for fresh produce, household essentials, and quality products at affordable prices.</p>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@mina.market0" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/minamarket._?igsh=cmQ1MmVqZjMxZjA3" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://maps.app.goo.gl/vWKGbzNEC5QxrnHU7" target="_blank"><i class="fa solid fa-location-dot"></i></a>
+            <a href="https://wa.me/+252633140000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="index.html#whats-new"><i class="fas fa-chevron-right"></i> What's New</a></li>
+                        <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+                        <li><a href="index.html#offers"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                        <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>World of Swimming</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Swimwear</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Swim Accessories</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Poolside Essentials</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Pool Essentials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and weekly updates</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-primary" style="width:100%;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <small>© <span id="year"></span> Mina Market. Built with <span class="heart">❤️</span> — ready to grow into e‑commerce later.</small>
+            </div>
+        </div>
+    </footer>
+
+   <script src="css-js/swim.js"></script>
+</body>
+</html>
