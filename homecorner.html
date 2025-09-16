@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home Corner - Mina Market</title>
+  <meta name="description" content="Discover essential home items including pillows, bedding, rugs, storage solutions, and decorative accessories at Mina Market." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+  
+  <link rel="stylesheet" href="css-js/home.css">
+
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Home">
+        <img src="./img/logoBIG.jpg" alt="Mina Market Logo" class="logo">
+
+        <h1>Mina Market <span style="color: var(--cyan-light);" class="tag">Family Favorites </span></h1>
+      </a>
+      
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search home essentials..." id="searchInput">
+        <button class="search-btn" aria-label="Search" id="searchBtn">
+          <i class="fas fa-search"></i>
+          <div class="db-status" id="dbStatus"></div>
+          <div class="db-tooltip" id="dbTooltip">Using local data</div>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <main class="container" role="main" aria-label="Home Corner Products">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+      <a href="categories.html">Categories</a>
+      <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
+      <span>Home Corner</span>
+    </div>
+    
+    <!-- Category Header -->
+    <section class="category-header">
+      <h1>Home Corner</h1>
+      <p>Discover essential home items including pillows, bedding, rugs, storage solutions, and decorative accessories for every room.</p>
+    </section>
+    
+    <!-- Special Offers Banner -->
+    <section class="special-offers">
+      <div class="offer-content">
+        <h2>Home Refresh Sale!</h2>
+        <a href="#products" class="btn btn-primary" style="background: white; color: var(--teal);">
+          View Products <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="offer-image">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Home Refresh Special Offer">
+      </div>
+    </section>
+    
+    <!-- Filter Section -->
+    <section class="filter-section">
+      <div class="filter-header" id="filterToggle">
+        <h2><i class="fas fa-filter"></i> Filter Products</h2>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="filter-content">
+        <div class="filter-group">
+          <h3>Price Range</h3>
+          <div class="price-range">
+            <input type="range" min="0" max="500" value="250" id="priceRange">
+            <div class="price-values">
+              <span>$0</span>
+              <span>$250</span>
+              <span>$500+</span>
+            </div>
+          </div>
+        </div>
+        
+
+          <div class="filter-group">
+          <h3>Customer Rating</h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="rating5" class="rating-filter" value="5">
+              <label for="rating5">5 Stars</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="rating4" class="rating-filter" value="4">
+              <label for="rating4">4+ Stars</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="rating3" class="rating-filter" value="3">
+              <label for="rating3">3+ Stars</label>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="filter-group">
+          <h3>Material / Room Type</h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="feature1" class="feature-filter" value="bedroom" >
+              <label for="bedroom">Bedroom</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature2" class="feature-filter" value="bathroom" >
+              <label for="feature2">Bathroom</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature3" class="feature-filter" value="living" >
+              <label for="feature3">Living Room</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature4" class="feature-filter" value="storage" >
+              <label for="storage">Storage</label>
+            </div>
+          </div>
+        
+        
+       
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="feature5" class="feature-filter" value="cotton">
+              <label for="feature5">Cotton</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature6" class="feature-filter" value="polyester">
+              <label for="feature6">Polyester</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature7" class="feature-filter" value="wood">
+              <label for="feature7">Wood</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="feature8" class="feature-filter" value="plastic">
+              <label for="feature8">Plastic</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Brand</h3>
+          <div class="filter-options">
+            <div class="filter-option">
+              <input type="checkbox" id="brand1" class="brand-filter" value="home-essentials" >
+              <label for="brand1">Home Essentials</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand2" class="brand-filter" value="comfort-living" >
+              <label for="brand2">Comfort Living</label>
+            </div>
+            <div class="filter-option">
+              <input type="checkbox" id="brand3" class="brand-filter" value="decor-style" >
+              <label for="brand3">Decor Style</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Subcategories Navigation -->
+    <div class="subcategories">
+      <button class="subcategory-btn active" data-subcategory="all">
+        <i class="fas fa-star"></i> All Products
+      </button>
+      <button class="subcategory-btn" data-subcategory="pillows">
+        <i class="fas fa-bed"></i> Pillows & Bedding
+      </button>
+      <button class="subcategory-btn" data-subcategory="bath">
+        <i class="fas fa-bath"></i> Bath & Mats
+      </button>
+      <button class="subcategory-btn" data-subcategory="rugs">
+        <i class="fas fa-rug"></i> Rugs
+      </button>
+      <button class="subcategory-btn" data-subcategory="storage">
+        <i class="fas fa-box-open"></i> Storage
+      </button>
+      <button class="subcategory-btn" data-subcategory="decor">
+        <i class="fas fa-paint-brush"></i> Decor
+      </button>
+      <button class="subcategory-btn" data-subcategory="furniture">
+        <i class="fas fa-couch"></i> Furniture
+      </button>
+    </div>
+    
+    <!-- Products Grid -->
+    <section class="products-grid" id="products">
+      <!-- Product cards will be populated by JavaScript -->
+    </section>
+    
+    <!-- Load More Button -->
+    <div class="load-more" id="loadMoreContainer" style="display: none;">
+      <button class="btn btn-primary" id="loadMoreBtn">
+        <i class="fas fa-plus"></i> Load More Products
+      </button>
+    </div>
+    
+    <!-- Recently Viewed Section -->
+    <section class="recently-viewed">
+      <div class="section-header">
+        <h2>Recently Viewed</h2>
+        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="recently-viewed-grid" id="recentlyViewed">
+        <!-- Recently viewed products will be populated by JavaScript -->
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h4>Mina Market</h4>
+          <p style="margin-bottom:20px;">Your local market for fresh produce, household essentials, and quality products at affordable prices.</p>
+          <div class="social-links">
+             <a href="https://www.tiktok.com/@mina.market0" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/minamarket._?igsh=cmQ1MmVqZjMxZjA3" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://maps.app.goo.gl/vWKGbzNEC5QxrnHU7" target="_blank"><i class="fa solid fa-location-dot"></i></a>
+            <a href="https://wa.me/+252633140000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="index.html#whats-new"><i class="fas fa-chevron-right"></i> What's New</a></li>
+            <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+            <li><a href="index.html#offers"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Home Corner</h4>
+          <ul>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Pillows & Bedding</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Bath & Mats</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Rugs</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Storage Solutions</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Home Decor</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Newsletter</h4>
+          <p>Subscribe to get special offers and weekly updates</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Your email address">
+            <button class="btn btn-primary" style="width:100%;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <small>© <span id="year"></span> Mina Market. Built with <span class="heart">❤️</span> — showcasing our products without e-commerce functionality.</small>
+      </div>
+    </div>
+  </footer>
+
+    <script src="css-js/home.js"></script>
+</body>
+</html>
