@@ -6,11 +6,9 @@ const fs = require('fs');
 
 // Load environment variables with better error handling
 try {
-  // Try to load from parent directory first (if running from src folder)
   require('dotenv').config({ path: '../.env' });
 } catch (error) {
   try {
-    // Try to load from current directory
     require('dotenv').config();
   } catch (error) {
     console.warn('No .env file found. Using default environment variables.');
@@ -42,13 +40,6 @@ app.get('/admin.html', (req, res) => {
 if (!process.env.MONGODB_URI) {
   console.error('ERROR: MONGODB_URI is not defined in environment variables');
   console.error('Please check your .env file or set the environment variable');
-  
-  // Provide helpful instructions
-  console.log('\nTo fix this:');
-  console.log('1. Create a .env file in your project root');
-  console.log('2. Add this line: MONGODB_URI=your_mongodb_connection_string');
-  console.log('3. Or set the environment variable: set MONGODB_URI=your_connection_string');
-  
   process.exit(1);
 }
 
@@ -101,11 +92,114 @@ const authenticateAdmin = (req, res, next) => {
   }
 };
 
-// API Routes
+// API Routes - FIXED: Implement proper search functionality
 app.get('/api/products/search', async (req, res) => {
   try {
-    // Your search logic here
-    res.json({ message: 'Search endpoint - implement your logic here' });
+    const {
+      q = '',
+      category = '',
+      subcategory = '',
+      minPrice = 0,
+      maxPrice = 1000,
+      minRating = 0,
+      brands = '',
+      features = '',
+      page = 1,
+      limit = 8
+    } = req.query;
+
+    // Build the filter object
+    const filter = {};
+
+    // Text search
+    if (q) {
+      filter.$or = [
+        { name: { $regex: q, $options: 'i' } },
+        { description: { $regex: q, $options: 'i' } },
+        { category: { $regex: q, $options: 'i' } },
+        { subcategory: { $regex: q, $options: 'i' } }
+      ];
+    }
+
+    // Category filter
+    if (category && category !== 'all') {
+      filter.category = category;
+    }
+
+    // Subcategory filter
+    if (subcategory && subcategory !== 'all') {
+      filter.subcategory = subcategory;
+    }
+
+    // Price filter
+    filter.price = { 
+      $gte: parseFloat(minPrice) || 0, 
+      $lte: parseFloat(maxPrice) || 1000 
+    };
+
+    // Rating filter
+    if (minRating) {
+      filter.rating = { $gte: parseFloat(minRating) };
+    }
+
+    // Brand filter
+    if (brands) {
+      const brandList = brands.split(',').filter(b => b);
+      if (brandList.length > 0) {
+        filter.brand = { $in: brandList };
+      }
+    }
+
+    // Features filter
+    if (features) {
+      const featureList = features.split(',').filter(f => f);
+      if (featureList.length > 0) {
+        filter.features = { $in: featureList };
+      }
+    }
+
+    // Calculate skip for pagination
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    // Execute query
+    const products = await Product.find(filter)
+      .skip(skip)
+      .limit(parseInt(limit))
+      .exec();
+
+    // Get total count for pagination
+    const total = await Product.countDocuments(filter);
+
+    res.json({
+      products,
+      totalPages: Math.ceil(total / parseInt(limit)),
+      currentPage: parseInt(page),
+      total
+    });
+  } catch (error) {
+    console.error('Error in products search:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get all products endpoint
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get product by ID
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(product);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -116,6 +210,47 @@ app.get('/api/admin/products', authenticateAdmin, async (req, res) => {
   try {
     const products = await Product.find({});
     res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Create new product
+app.post('/api/admin/products', authenticateAdmin, async (req, res) => {
+  try {
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update product
+app.put('/api/admin/products/:id', authenticateAdmin, async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete product
+app.delete('/api/admin/products/:id', authenticateAdmin, async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json({ message: 'Product deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

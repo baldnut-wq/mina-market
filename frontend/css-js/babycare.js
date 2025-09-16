@@ -31,7 +31,50 @@ const babyProducts = [
         brand: "pampers",
         features: ["hypoallergenic"]
     },
-    // Add more baby products here as needed
+    {
+        id: "p2",
+        name: "Baby Diapers",
+        category: "babycare",
+        subcategory: "diapers",
+        description: "Super absorbent diapers for overnight protection.",
+        image: "/img/diapers.jpg",
+        price: 24.99,
+        originalPrice: 29.99,
+        badge: "Bestseller",
+        rating: 4.7,
+        reviewCount: 892,
+        reviews: [
+            {
+                text: "Best diapers I've ever used! No leaks at night.",
+                author: "Jessica L.",
+                rating: 5
+            }
+        ],
+        brand: "huggies",
+        features: ["absorbent", "hypoallergenic"]
+    },
+    {
+        id: "p3",
+        name: "Baby Shampoo",
+        category: "babycare",
+        subcategory: "bath",
+        description: "Gentle shampoo for baby's delicate hair and skin.",
+        image: "/img/shampoo.jpg",
+        price: 8.99,
+        originalPrice: null,
+        badge: "Natural",
+        rating: 4.5,
+        reviewCount: 456,
+        reviews: [
+            {
+                text: "My baby's hair has never been softer!",
+                author: "Maria K.",
+                rating: 4
+            }
+        ],
+        brand: "johnsons",
+        features: ["natural", "tear-free"]
+    }
 ];
 
 // MongoDB connection status
@@ -47,12 +90,59 @@ let currentFilters = {
     features: []
 };
 
-// Replace this with your actual Render backend URL
-const BACKEND_URL = 'https://mina-market-2.onrender.com';
+// Backend URL - try local first, then fall back to Render
+let BACKEND_URL = 'http://localhost:5000';
+
+// Function to determine the best backend URL to use
+async function determineBackendURL() {
+    try {
+        // First try localhost
+        const response = await fetch('http://localhost:5000/api/health', {
+            method: 'GET',
+            signal: AbortSignal.timeout(3000)
+        });
+        
+        if (response.ok) {
+            console.log('Using local backend');
+            return 'http://localhost:5000';
+        }
+    } catch (error) {
+        console.log('Local backend not available, trying Render backend');
+    }
+    
+    // If local fails, try Render
+    try {
+        const response = await fetch('https://mina-market-2.onrender.com/api/health', {
+            method: 'GET',
+            signal: AbortSignal.timeout(5000)
+        });
+        
+        if (response.ok) {
+            console.log('Using Render backend');
+            return 'https://mina-market-2.onrender.com';
+        }
+    } catch (error) {
+        console.log('Render backend not available either');
+    }
+    
+    // If both fail, we'll use local data
+    console.log('No backend available, using local data only');
+    return null;
+}
 
 // Safely check MongoDB connection
 async function checkMongoDBConnection() {
     try {
+        const backendURL = await determineBackendURL();
+        
+        if (!backendURL) {
+            isMongoDBConnected = false;
+            updateDBStatusIndicator(false);
+            return false;
+        }
+        
+        BACKEND_URL = backendURL;
+        
         // Use a timeout to prevent hanging if server isn't responding
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3000);
@@ -399,6 +489,7 @@ async function initializePage() {
     if (isMongoDBConnected) {
         await fetchProductsFromMongoDB(currentFilters, currentPage);
     } else {
+        // Use local data
         populateProductsGrid(babyProducts);
     }
 }
