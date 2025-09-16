@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mina Market - Family Favorites</title>
+  <meta name="description" content="Modern, colorful, mobile-friendly market website for updates, new arrivals, and categories." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css-js/index.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="#" class="brand" aria-label="Home">
+  <!--  logo image -->
+  <img src="./img/logoBIG.jpg" alt="Mina Market Logo" class="logo">
+</a>
+        <h1>Mina Market <span style="color: rgb(212, 205, 16); font-family: Arial, Helvetica, sans-serif;" class="tag">Family Favorites</span></h1>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <span class="menu-icon"></span>
+      </button>
+    </div>
+  </header>
+  
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="scrim" id="scrim"></div>
+    <div class="panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <header>
+        <h3 id="drawerTitle">Browse Categories</h3>
+        <button class="close" id="closeBtn" aria-label="Close">×</button>
+      </header>
+      <nav id="categoriesMenu">
+        <!-- hoy hadaa Categories will be populated by JavaScript -->
+      </nav>
+    </div>
+  </aside>
+  
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="badge"><i class="fas fa-bolt"></i> Welcome to Mina Market, The biggest and the Best in Hargiesa, Somaliland. </span>
+        <h2>Welcome !.</h2>
+        <p>explore it and find something especial for everybody.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#whats-new">
+            <i class="fas fa-star"></i> See What’s New
+          </a>
+          <a class="btn btn-ghost" href="#categories">
+            <i class="fas fa-th-large"></i> Browse Categories
+          </a>
+        </div>
+      </div>
+      <div class="card" aria-hidden="true">
+        <div class="media">
+          <i class="fas fa-shopping-basket category-icon"></i>
+          <img src="./img2/hero.png" alt="Market products">
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="whats-new">
+      <div class="section-title">
+        <i class="fas fa-star"></i>
+        <h3>What's New</h3>
+      </div>
+      
+      <div class="section-header">
+        <h4>Fresh Arrivals</h4>
+        <a href="Categories.html" class="view-all">View all <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie category-icon"></i>
+            <img src="./img/snickers.jpg" alt="Snacks">
+          </div>
+          <div class="body">
+            <div class="pill new">This Week</div>
+            <h4>Crunchy Treats</h4>
+            <p class="muted">Limited‑time flavors just landed.</p>
+            <div class="price">$0.99</div>
+            <button class="btn btn-ghost" onclick="location.href='foods.html'">Learn More</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-leaf category-icon"></i>
+            <img src="./img/almond.jpg" alt="Organic produce">
+          </div>
+          <div class="body">
+            <div class="pill fresh">Fresh</div>
+            <h4>Farm‑fresh Produce</h4>
+            <p class="muted">Crisp greens & vibrant fruits.</p>
+            <div class="price">$2.49/lb</div>
+            <button class="btn btn-ghost" onclick="location.href='grains.html'">Learn More</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-baby category-icon"></i>
+            <img src="./img/babysemp1.jpg" alt="Baby products">
+          </div>
+          <div class="body">
+            <div class="pill restocked">Restocked</div>
+            <h4>Baby Essentials</h4>
+            <p class="muted">Diapers, wipes, and more.</p>
+            <div class="price"><s>$21.99</s> $19.99</div>
+            <button  class="btn btn-ghost"  onclick="location.href='babycare.html'">Learn More</button>
+            
+          </div>
+        </article>
+      </div>
+    </section>
+    
+    <section class="section category-carousel" id="categories">
+      <div class="section-title">
+        <i class="fas fa-th-large"></i>
+        <h3>Categories</h3>
+      </div>
+      
+      <div class="carousel-container" id="carouselContainer">
+        <!-- Carousel cards will be populated by JavaScript cabdow la soco -->
+      </div>
+      
+      <div class="carousel-nav" id="carouselNav">
+        <!-- Navigation dots will be populated by JavaScript  ha ilaawin inzha allah-->
+      </div>
+    </section>
+    
+    <section class="section" id="Foods">
+      <div class="section-title">
+        <i class="fas fa-apple-alt"></i>
+        <h3>Foods</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Beverages">
+          </div>
+          <div class="body">
+            <h4>Juices & Sodas</h4>
+            <p class="muted">Refreshing drinks for every taste.</p>
+            <button class="btn btn-ghost" onclick="location.href='fresh.html'" >Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="/img/grains12.jpg" alt="Snacks">
+          </div>
+          <div class="body">
+            <h4>Chips & Nuts</h4>
+            <p class="muted">Crunchy snacks for every occasion.</p>
+            <button class="btn btn-ghost" onclick="location.href='foods.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Staples">
+          </div>
+          <div class="body">
+            <h4>Rice, Flour, Oil</h4>
+            <p class="muted">Essential ingredients for your kitchen.</p>
+            <button class="btn btn-ghost"  onclick="location.href='foods.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+
+
+
+
+    <section class="section" id="Cosmetics">
+      <div class="section-title">
+        <i class="fas fa-bath"></i>
+        <h3>Bath & Beauty</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="./img/shampo&conditioners.jpg" alt="Shampoo">
+          </div>
+          <div class="body">
+            <h4>Shampoos And Conditioners</h4>
+            <p class="muted">Refreshing Care for Your body and Hair.</p>
+            <button class="btn btn-ghost" onclick="location.href='personalcare.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="img/sprays.jpg" alt="body care">
+          </div>
+          <div class="body">
+            <h4>Body Care</h4>
+            <p class="muted">Essential products For daily freshness.</p>
+            <button class="btn btn-ghost" onclick="location.href='personalcare.html'" >Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="./img/nailpolish.jpg" alt="Makeup and beatuy">
+          </div>
+          <div class="body">
+            <h4>Makeup & beauty</h4>
+            <p class="muted">Colors and essentials for every occasion.</p>
+            <button class="btn btn-ghost" onclick="location.href='personalcare.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+
+
+      <section class="section" id="baby-care">
+      <div class="section-title">
+        <i class="fas fa-baby"></i>
+        <h3>Baby Care</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="./img/nafisdiaper.jpg" alt="diapers & wipes">
+          </div>
+          <div class="body">
+            <h4>Diapers and wipes</h4>
+            <p class="muted">Gentle care for everyday comfort.</p>
+            <button class="btn btn-ghost" onclick="location.href='babycare.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="img/bledinaminilactes.jpg" alt="baby milk & food">
+          </div>
+          <div class="body">
+            <h4>Baby Food and milk</h4>
+            <p class="muted">Nutritious meals and milks for every stage.</p>
+            <button  class="btn btn-ghost" onclick="location.href='babycare.html'">Explore</button>
+            
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="./img2/baby care ess.jpg" alt="care & bottles">
+          </div>
+          <div class="body">
+            <h4>Baby care & Bottles</h4>
+            <p class="muted">Shampoo,Lotions,oils and feeding essentials for little tummies.</p>
+            <button class="btn btn-ghost " onclick="location.href='babycare.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+
+          
+    <section class="section" id="household">
+      <div class="section-title">
+        <i class="fas fa-home"></i>
+        <h3>Home Corner</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="img/pillowcase.jpg" alt="Bedroom">
+          </div>
+          <div class="body">
+            <h4>Bedroom &  comforts</h4>
+            <p class="muted">Bed pillows,sheets and cozy essentials for sweet sleep.</p>
+            <button class="btn btn-ghost" onclick="location.href='homecorner.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="img/flowercase.jpg" alt="decor">
+          </div>
+          <div class="body">
+            <h4>Decor & Style</h4>
+            <p class="muted">Mirrors,Vases And elegant touches for every corner.</p>
+            <button class="btn btn-ghost" onclick="location.href='homecorner.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="./img/ElectricSuitcase.jpg" alt="travel">
+          </div>
+          <div class="body">
+            <h4>Travel and offices</h4>
+            <p class="muted">Suitcases and stylish desk decorations for daily life.</p>
+            <button class="btn btn-ghost" onclick="location.href='homecorner.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+
+
+    <section class="section" id="cookndine">
+      <div class="section-title">
+        <i class="fas fa-utensils"></i>
+        <h3>Cook & Dine</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="./img/cooking-set.jpg" alt="pots,pand and tools">
+          </div>
+          <div class="body">
+            <h4>Cooking made simple</h4>
+            <p class="muted">Everyday pots, pans & tools that make cooking a joy.</p>
+            <button class="btn btn-ghost" onclick="location.href='cookdine.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="img/plates.jpg" alt="Dine">
+          </div>
+          <div class="body">
+            <h4>Dining In a Style</h4>
+            <p class="muted">Plates, glasses & cutlery for cozy meals and gatherings.</p>
+            <button class="btn btn-ghost" onclick="location.href='cookdine.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="./img/storage-containers.jpg" alt="Makeup and beatuy">
+          </div>
+          <div class="body">
+            <h4>Kitchen Comforts</h4>
+            <p class="muted">Storage, Jars & little helpers to keep life easy and neat.</p>
+            <button class="btn btn-ghost" onclick="location.href='cookdine.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+      
+
+    <section class="section" id="kid'splay">
+      <div class="section-title">
+        <i class="fa fa-child" aria-hidden="true"></i>
+        <h3>Kid's play</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="/img/basketball.jpg" alt="Sports">
+          </div>
+          <div class="body">
+            <h4>Sports & Fun</h4>
+            <p class="muted">Football, basketball, volleyball and small balls for endless play.</p>
+            <button class="btn btn-ghost" onclick="location.href='kids.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="/img/school.jpg " alt="Shcool supplies">
+          </div>
+          <div class="body">
+            <h4>School & creativity</h4>
+            <p class="muted">School bags, notebooks/pens & colors for bright mind.</p>
+            <button class="btn btn-ghost" onclick="location.href='kids.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="./img/beartoy.jpg" alt="Toys">
+          </div>
+          <div class="body">
+            <h4>Toys & Adventures</h4>
+            <p class="muted">Little joys for big imaginations.</p>
+            <button class="btn btn-ghost" onclick="location.href='kids.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+      
+
+    <section class="section" id="swimming">
+      <div class="section-title">
+        <i class="fas fa-swimmer"></i>
+        <h3>World of Swimming</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="img/smallpool.jpg" alt="pool">
+          </div>
+          <div class="body">
+            <h4>Swimming Pools</h4>
+            <p class="muted">Inflatable, foldable, and fun-sized pools for some ageas</p>
+            <button class="btn btn-ghost" onclick="location.href='Swimming.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="img/swimsuit.jpg" alt="👙 Swimming Suits">
+          </div>
+          <div class="body">
+            <h4>Swimming Suits</h4>
+            <p class="muted">Comfortable and colorful swimwear for kids <br>(next=Adults).</p>
+            <button class="btn btn-ghost" onclick="location.href='Swimming.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="./img/swimgear.jpg" alt="swim gear">
+          </div>
+          <div class="body">
+            <h4> Essential Swim Gear</h4>
+            <p class="muted">Goggles ,Swim caps ,Swim socks for grip & comfort and Water bottles to stay hydrated .</p>
+            <button class="btn btn-ghost" onclick="location.href='Swimming.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+
+      
+    <section class="section" id="bakery">
+      <div class="section-title">
+        <i class="fas fa-wheat-alt"></i>
+        <h3>Granis & Goodness</h3>
+      </div>
+      
+      <div class="grid cards">
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wine-bottle category-icon"></i>
+            <img src="img/naturalhoney.jpg" alt="Honey">
+          </div>
+          <div class="body">
+            <h4>Nature's Harvest</h4>
+            <p class="muted">Pure and Natural honey, Oils & wholesome grains.</p>
+            <button class="btn btn-ghost" onclick="location.href='grains.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-cookie-bite category-icon"></i>
+            <img src="img/flavorful.jpg" alt="flavorful">
+          </div>
+          <div class="body">
+            <h4>Fresh & Flavorful</h4>
+            <p class="muted">Fruits,datrs and spices full of life.</p>
+            <button class="btn btn-ghost" onclick="location.href='grains.html'">Explore</button>
+          </div>
+        </article>
+        
+        <article class="card">
+          <div class="media">
+            <i class="fas fa-wheat-alt category-icon"></i>
+            <img src="img/lolipops.jpg" alt="Sweet Moments">
+          </div>
+          <div class="body">
+            <h4>Sweet Moments</h4>
+            <p class="muted">From Fuity bites to little treats.</p>
+            <button class="btn btn-ghost" onclick="location.href='grains.html'">Explore</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    
+    
+  <!--special offer halkan ayad soo gelin hadii loo baahdo -->
+
+
+   
+  
+
+      <section class="section" id="contact">
+        <div class="section-title">
+            <i class="fas fa-envelope"></i>
+            <h3>Contact Us</h3>
+        </div>
+        
+        <div class="card" style="padding: 30px;">
+            <!-- Loading indicator -->
+            <div id="loadingIndicator" style="display:none; text-align:center; padding:30px;">
+                <div style="width: 40px; height: 40px; border: 4px solid rgba(67, 97, 238, 0.1); border-radius: 50%; border-top: 4px solid #4361ee; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+                <p>Sending your message...</p>
+            </div>
+            
+            <form id="contactForm" action="https://formspree.io/f/myzdbkrb" method="POST">
+                <div style="display:grid; gap:20px; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); margin-bottom: 20px;">
+                    <div>
+                        <label for="name" style="display:block; margin-bottom:8px; font-weight:500;">Your Name</label>
+                        <input id="name" name="name" required placeholder="Zakaria Apdilahi" style="width:100%; padding:14px; border:1px solid #e5e7eb; border-radius:14px; font-family:inherit;">
+                    </div>
+                    <div>
+                        <label for="phone" style="display:block; margin-bottom:8px; font-weight:500;">Phone</label>
+                        <input id="phone" name="phone" required type="tel" placeholder="(123) 456-7890" style="width:100%; padding:14px; border:1px solid #e5e7eb; border-radius:14px; font-family:inherit;">
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="message" style="display:block; margin-bottom:8px; font-weight:500;">Your Message</label>
+                    <textarea id="message" name="message" required placeholder="How can we help you?" rows="4" style="width:100%; padding:14px; border:1px solid #e5e7eb; border-radius:14px; font-family:inherit;"></textarea>
+                </div>
+                
+                <div style="display:flex; gap:15px;">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                    <button class="btn btn-ghost" type="reset">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Custom Success Message -->
+            <div id="successMessage" style="display:none; text-align:center; padding:30px;">
+                <i class="fas fa-check-circle" style="font-size:4rem; color:#06d6a0; margin-bottom:20px;"></i>
+                <h3 style="margin-bottom:10px;">Message Sent Successfully!</h3>
+                <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                <button class="btn btn-ghost" style="margin-top:20px;" onclick="resetForm()">
+                    <i class="fas fa-envelope"></i> Let's Go Back!.
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+<script>
+        const form = document.getElementById("contactForm");
+        const successMessage = document.getElementById("successMessage");
+        const loadingIndicator = document.getElementById("loadingIndicator");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            // Show loading indicator, hide form
+            form.style.display = "none";
+            loadingIndicator.style.display = "block";
+            
+            try {
+                const formData = new FormData(form);
+                
+                // Send data to Formspree
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                // Simulate a short delay for better UX
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                if (response.ok) {
+                    // Show success message, hide loading indicator
+                    loadingIndicator.style.display = "none";
+                    successMessage.style.display = "block";
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Show error message and revert to form
+                loadingIndicator.style.display = "none";
+                form.style.display = "block";
+                alert("Oops! Something went wrong. Please try again.");
+                console.error('Form submission error:', error);
+            }
+        });
+
+        function resetForm() {
+            successMessage.style.display = "none";
+            form.style.display = "block";
+        }
+        
+        // Add keyframes for the loading spinner animation
+        document.head.appendChild(document.createElement('style')).textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+    </script>
+
+
+
+
+
+
+  </main>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h4>Mina Market</h4>
+          <p style="margin-bottom:20px;">Your local market for fresh produce, household essentials, and quality products at affordable prices.</p>
+          <div class="social-links">
+            <a href="https://www.tiktok.com/@mina.market0" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/minamarket._?igsh=cmQ1MmVqZjMxZjA3" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://maps.app.goo.gl/vWKGbzNEC5QxrnHU7" target="_blank"><i class="fa solid fa-location-dot"></i></a>
+            <a href="https://wa.me/+252633140000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="#whats-new"><i class="fas fa-chevron-right"></i> What's New</a></li>
+            <li><a href="#categories"><i class="fas fa-chevron-right"></i> Categories</a></li>
+            <li><a href="#offers"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#foods"><i class="fas fa-chevron-right"></i> Foods</a></li>
+            <li><a href="#cosmetics"><i class="fas fa-chevron-right"></i> Cosmetics</a></li>
+            <li><a href="#baby-care"><i class="fas fa-chevron-right"></i> Baby Care</a></li>
+            <li><a href="#household"><i class="fas fa-chevron-right"></i> Household</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Beverages</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Newsletter</h4>
+          <p>Subscribe to get special offers and weekly updates</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Your email address">
+            <button class="btn btn-primary" style="width:100%;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <small>© <span id="year"></span> Mina Market. Built with <span class="heart">❤️</span> — ready to grow into e‑commerce later.</small>
+      </div>
+    </div>
+  </footer>
+  
+  <a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  
+  <script src="css-js/index.js"></script>
+</body>
+</html>
