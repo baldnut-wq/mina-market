@@ -48,7 +48,7 @@ let currentFilters = {
 };
 
 // Replace this with your actual Render backend URL
-const BACKEND_URL = 'https://your-backend-name.onrender.com';
+const BACKEND_URL = 'https://mina-market-2.onrender.com';
 
 // Safely check MongoDB connection
 async function checkMongoDBConnection() {
