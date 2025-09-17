@@ -90,81 +90,31 @@ let currentFilters = {
     features: []
 };
 
-// Backend URL - try local first, then fall back to Render
-let BACKEND_URL = 'http://localhost:5000';
+// Backend URL - use your Render backend URL directly
+const BACKEND_URL = 'https://mina-market-2.onrender.com';
 
-// Function to determine the best backend URL to use
-async function determineBackendURL() {
-    try {
-        // First try localhost
-        const response = await fetch('http://localhost:5000/api/health', {
-            method: 'GET',
-            signal: AbortSignal.timeout(3000)
-        });
-        
-        if (response.ok) {
-            console.log('Using local backend');
-            return 'http://localhost:5000';
-        }
-    } catch (error) {
-        console.log('Local backend not available, trying Render backend');
-    }
-    
-    // If local fails, try Render
-    try {
-        const response = await fetch('https://mina-market-2.onrender.com/api/health', {
-            method: 'GET',
-            signal: AbortSignal.timeout(5000)
-        });
-        
-        if (response.ok) {
-            console.log('Using Render backend');
-            return 'https://mina-market-2.onrender.com';
-        }
-    } catch (error) {
-        console.log('Render backend not available either');
-    }
-    
-    // If both fail, we'll use local data
-    console.log('No backend available, using local data only');
-    return null;
-}
-
-// Safely check MongoDB connection
+// Function to check MongoDB connection
 async function checkMongoDBConnection() {
     try {
-        const backendURL = await determineBackendURL();
-        
-        if (!backendURL) {
-            isMongoDBConnected = false;
-            updateDBStatusIndicator(false);
-            return false;
-        }
-        
-        BACKEND_URL = backendURL;
-        
         // Use a timeout to prevent hanging if server isn't responding
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
         
-        const response = await fetch(`${BACKEND_URL}/api/products/search?category=babycare&limit=1`, {
+        const response = await fetch(`${BACKEND_URL}/api/health`, {
             signal: controller.signal
         });
         
         clearTimeout(timeoutId);
         
         if (response.ok) {
-            isMongoDBConnected = true;
-            console.log('Connected to MongoDB backend');
-            updateDBStatusIndicator(true);
-            return true;
+            const data = await response.json();
+            isMongoDBConnected = data.database === 'Connected';
+            console.log('MongoDB connection status:', isMongoDBConnected);
+            updateDBStatusIndicator(isMongoDBConnected);
+            return isMongoDBConnected;
         }
     } catch (error) {
-        if (error.name === 'AbortError') {
-            console.log('MongoDB connection timeout - using local data');
-        } else {
-            console.log('MongoDB not available - using local data:', error.message);
-        }
+        console.log('MongoDB not available - using local data:', error.message);
     }
     
     isMongoDBConnected = false;
@@ -210,19 +160,13 @@ async function fetchProductsFromMongoDB(filters, page = 1) {
 
     // Add timeout to prevent hanging
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
     
     const response = await fetch(`${BACKEND_URL}/api/products/search?${params}`, {
       signal: controller.signal
     });
     
     clearTimeout(timeoutId);
-    
-    // Check if response is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Server did not return JSON');
-    }
     
     if (!response.ok) {
       throw new Error(`Server returned ${response.status}`);
@@ -349,7 +293,7 @@ function populateProductsGrid(products) {
         
         card.innerHTML = `
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300?text=Image+Not+Found'">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
             </div>
             <div class="product-content">

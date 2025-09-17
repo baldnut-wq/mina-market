@@ -4,24 +4,11 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
-// Load environment variables with better error handling
-try {
-  require('dotenv').config({ path: '../.env' });
-} catch (error) {
-  try {
-    require('dotenv').config();
-  } catch (error) {
-    console.warn('No .env file found. Using default environment variables.');
-  }
-}
+// Load environment variables
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// Debug: Check if environment variables are loading
-console.log('Environment check:');
-console.log('- PORT:', process.env.PORT);
-console.log('- MONGODB_URI exists:', !!process.env.MONGODB_URI);
 
 // Middleware
 app.use(cors());
@@ -29,17 +16,14 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static('public'));
 
-// Serve HTML files
-app.get('/admin.html', (req, res) => {
-  res.sendFile('admin.html', { root: __dirname });
-});
+// Debug: Check if environment variables are loading
+console.log('Environment check:');
+console.log('- PORT:', process.env.PORT);
+console.log('- MONGODB_URI exists:', !!process.env.MONGODB_URI);
 
-// Add other category pages as needed
-
-// MongoDB Connection with better error handling
+// MongoDB Connection
 if (!process.env.MONGODB_URI) {
   console.error('ERROR: MONGODB_URI is not defined in environment variables');
-  console.error('Please check your .env file or set the environment variable');
   process.exit(1);
 }
 
@@ -76,6 +60,8 @@ const productSchema = new mongoose.Schema({
   }],
   brand: String,
   features: [String]
+}, {
+  timestamps: true
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -92,7 +78,9 @@ const authenticateAdmin = (req, res, next) => {
   }
 };
 
-// API Routes - FIXED: Implement proper search functionality
+// API Routes
+
+// Search products
 app.get('/api/products/search', async (req, res) => {
   try {
     const {
@@ -182,7 +170,7 @@ app.get('/api/products/search', async (req, res) => {
   }
 });
 
-// Get all products endpoint
+// Get all products
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find({});
@@ -205,11 +193,26 @@ app.get('/api/products/:id', async (req, res) => {
   }
 });
 
-// Admin routes
+// Admin routes - require authentication
+
+// Get all products for admin
 app.get('/api/admin/products', authenticateAdmin, async (req, res) => {
   try {
     const products = await Product.find({});
     res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get product by ID for admin
+app.get('/api/admin/products/:id', authenticateAdmin, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(product);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -256,6 +259,26 @@ app.delete('/api/admin/products/:id', authenticateAdmin, async (req, res) => {
   }
 });
 
+// Get all categories for admin
+app.get('/api/admin/categories', authenticateAdmin, async (req, res) => {
+  try {
+    const categories = await Product.distinct('category');
+    res.json(categories);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get all brands for admin
+app.get('/api/admin/brands', authenticateAdmin, async (req, res) => {
+  try {
+    const brands = await Product.distinct('brand');
+    res.json(brands.filter(brand => brand)); // Filter out null/empty values
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
@@ -263,6 +286,11 @@ app.get('/api/health', (req, res) => {
     database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
     timestamp: new Date().toISOString()
   });
+});
+
+// Serve HTML files
+app.get('/admin.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
 // Start server
