@@ -98,6 +98,36 @@ async function checkMongoDBConnection() {
     try {
         // Use a timeout to prevent hanging if server isn't responding
         const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        // Use BACKEND_URL instead of localhost
+        const response = await fetch(`${BACKEND_URL}/api/products/search?category=cleancare&limit=1`, {
+            signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (response.ok) {
+            isMongoDBConnected = true;
+            console.log('Connected to MongoDB backend');
+            updateDBStatusIndicator(true);
+            return true;
+        }
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log('MongoDB connection timeout - using local data');
+        } else {
+            console.log('MongoDB not available - using local data:', error.message);
+        }
+    }
+    
+    isMongoDBConnected = false;
+    updateDBStatusIndicator(false);
+    return false;
+}{
+    try {
+        // Use a timeout to prevent hanging if server isn't responding
+        const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
         
         const response = await fetch(`${BACKEND_URL}/api/health`, {
@@ -444,3 +474,8 @@ if (document.readyState === 'loading') {
 } else {
     initializePage();
 }
+// If DOM is already loaded, initialize immediately
+    if (document.readyState !== 'loading' && !window.appInitialized) {
+      window.appInitialized = true;
+      initializePage();
+    }

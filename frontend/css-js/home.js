@@ -80,14 +80,50 @@
         features: []
     };
 
+  
+    // Backend URL - use your Render backend URL directly
+const BACKEND_URL = 'https://mina-market-2.onrender.com';
+
+
+
     // Safely check MongoDB connection
     async function checkMongoDBConnection() {
+    try {
+        // Use a timeout to prevent hanging if server isn't responding
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        // Use BACKEND_URL instead of localhost
+        const response = await fetch(`${BACKEND_URL}/api/products/search?category=cleancare&limit=1`, {
+            signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (response.ok) {
+            isMongoDBConnected = true;
+            console.log('Connected to MongoDB backend');
+            updateDBStatusIndicator(true);
+            return true;
+        }
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log('MongoDB connection timeout - using local data');
+        } else {
+            console.log('MongoDB not available - using local data:', error.message);
+        }
+    }
+    
+    isMongoDBConnected = false;
+    updateDBStatusIndicator(false);
+    return false;
+}{
         try {
             // Use a timeout to prevent hanging if server isn't responding
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 3000);
             
-            const response = await fetch('http://localhost:5000/api/products/search?category=home&limit=1', {
+            const response = await fetch('https://mina-market-2.onrender.com/api/products/search?category=home&limit=1', {
                 signal: controller.signal
             });
             
@@ -152,8 +188,7 @@ async function fetchProductsFromMongoDB(filters, page = 1) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
     
-    const response = await fetch(`http://localhost:5000/api/products/search?${params}`, {
-      signal: controller.signal
+    const response = await fetch(`${BACKEND_URL}/api/products/search?${params}`, {      signal: controller.signal
     });
     
     clearTimeout(timeoutId);
@@ -442,4 +477,8 @@ async function fetchProductsFromMongoDB(filters, page = 1) {
     }
   
 
-    
+    // If DOM is already loaded, initialize immediately
+    if (document.readyState !== 'loading' && !window.appInitialized) {
+      window.appInitialized = true;
+      initializePage();
+    }

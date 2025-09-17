@@ -93,38 +93,76 @@
       features: []
     };
 
+
+    
+    // Backend URL - use your Render backend URL directly
+const BACKEND_URL = 'https://mina-market-2.onrender.com';
+
+
+
+
     // Safely check MongoDB connection
     async function checkMongoDBConnection() {
-      try {
+    try {
         // Use a timeout to prevent hanging if server isn't responding
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3000);
         
-        const response = await fetch('http://localhost:5000/api/products/search?category=cookdine&limit=1', {
-          signal: controller.signal
+        // Use BACKEND_URL instead of localhost
+        const response = await fetch(`${BACKEND_URL}/api/products/search?category=cleancare&limit=1`, {
+            signal: controller.signal
         });
         
         clearTimeout(timeoutId);
         
         if (response.ok) {
-          isMongoDBConnected = true;
-          console.log('Connected to MongoDB backend');
-          updateDBStatusIndicator(true);
-          return true;
+            isMongoDBConnected = true;
+            console.log('Connected to MongoDB backend');
+            updateDBStatusIndicator(true);
+            return true;
         }
-      } catch (error) {
+    } catch (error) {
         if (error.name === 'AbortError') {
-          console.log('MongoDB connection timeout - using local data');
+            console.log('MongoDB connection timeout - using local data');
         } else {
-          console.log('MongoDB not available - using local data:', error.message);
+            console.log('MongoDB not available - using local data:', error.message);
         }
-      }
-      
-      isMongoDBConnected = false;
-      updateDBStatusIndicator(false);
-      return false;
     }
-
+    
+    isMongoDBConnected = false;
+    updateDBStatusIndicator(false);
+    return false;
+}{
+    try {
+        // Use a timeout to prevent hanging if server isn't responding
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        // Use BACKEND_URL instead of localhost
+        const response = await fetch(`${BACKEND_URL}/api/products/search?category=cleancare&limit=1`, {
+            signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (response.ok) {
+            isMongoDBConnected = true;
+            console.log('Connected to MongoDB backend');
+            updateDBStatusIndicator(true);
+            return true;
+        }
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log('MongoDB connection timeout - using local data');
+        } else {
+            console.log('MongoDB not available - using local data:', error.message);
+        }
+    }
+    
+    isMongoDBConnected = false;
+    updateDBStatusIndicator(false);
+    return false;
+}
     // Update MongoDB status indicator
     function updateDBStatusIndicator(connected) {
       const dbStatus = document.getElementById('dbStatus');
@@ -165,8 +203,7 @@ async function fetchProductsFromMongoDB(filters, page = 1) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
     
-    const response = await fetch(`http://localhost:5000/api/products/search?${params}`, {
-      signal: controller.signal
+    const response = await fetch(`${BACKEND_URL}/api/products/search?${params}`, {      signal: controller.signal
     });
     
     clearTimeout(timeoutId);
@@ -446,8 +483,16 @@ async function fetchProductsFromMongoDB(filters, page = 1) {
     }
 
     // Start the application when DOM is loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializePage);
-    } else {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ensure we don't duplicate initialization if script loads after DOM is ready
+      if (!window.appInitialized) {
+        window.appInitialized = true;
+        initializePage();
+      }
+    });
+
+    // If DOM is already loaded, initialize immediately
+    if (document.readyState !== 'loading' && !window.appInitialized) {
+      window.appInitialized = true;
       initializePage();
     }
