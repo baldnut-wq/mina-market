@@ -148,7 +148,7 @@
         items: "90+ products",
         status: "popular",
         department: "Electronics",
-        page: "swimming.html" // Individual page for this category
+        page: "Swimming.html" // Individual page for this category
       }
 
     ];

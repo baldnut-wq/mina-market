@@ -31,50 +31,7 @@ const babyProducts = [
         brand: "pampers",
         features: ["hypoallergenic"]
     },
-    {
-        id: "p2",
-        name: "Baby Diapers",
-        category: "babycare",
-        subcategory: "diapers",
-        description: "Super absorbent diapers for overnight protection.",
-        image: "/img/diapers.jpg",
-        price: 24.99,
-        originalPrice: 29.99,
-        badge: "Bestseller",
-        rating: 4.7,
-        reviewCount: 892,
-        reviews: [
-            {
-                text: "Best diapers I've ever used! No leaks at night.",
-                author: "Jessica L.",
-                rating: 5
-            }
-        ],
-        brand: "huggies",
-        features: ["absorbent", "hypoallergenic"]
-    },
-    {
-        id: "p3",
-        name: "Baby Shampoo",
-        category: "babycare",
-        subcategory: "bath",
-        description: "Gentle shampoo for baby's delicate hair and skin.",
-        image: "/img/shampoo.jpg",
-        price: 8.99,
-        originalPrice: null,
-        badge: "Natural",
-        rating: 4.5,
-        reviewCount: 456,
-        reviews: [
-            {
-                text: "My baby's hair has never been softer!",
-                author: "Maria K.",
-                rating: 4
-            }
-        ],
-        brand: "johnsons",
-        features: ["natural", "tear-free"]
-    }
+    // Add more baby products here as needed
 ];
 
 // MongoDB connection status
@@ -90,18 +47,17 @@ let currentFilters = {
     features: []
 };
 
-// Backend URL - use your Render backend URL directly
+// Replace this with your actual Render backend URL
 const BACKEND_URL = 'https://mina-market-2.onrender.com';
 
-// Function to check MongoDB connection
+// Safely check MongoDB connection
 async function checkMongoDBConnection() {
     try {
         // Use a timeout to prevent hanging if server isn't responding
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 3000);
         
-        // Use BACKEND_URL instead of localhost
-        const response = await fetch(`${BACKEND_URL}/api/products/search?category=cleancare&limit=1`, {
+        const response = await fetch(`${BACKEND_URL}/api/products/search?category=babycare&limit=1`, {
             signal: controller.signal
         });
         
@@ -119,32 +75,6 @@ async function checkMongoDBConnection() {
         } else {
             console.log('MongoDB not available - using local data:', error.message);
         }
-    }
-    
-    isMongoDBConnected = false;
-    updateDBStatusIndicator(false);
-    return false;
-}{
-    try {
-        // Use a timeout to prevent hanging if server isn't responding
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        
-        const response = await fetch(`${BACKEND_URL}/api/health`, {
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (response.ok) {
-            const data = await response.json();
-            isMongoDBConnected = data.database === 'Connected';
-            console.log('MongoDB connection status:', isMongoDBConnected);
-            updateDBStatusIndicator(isMongoDBConnected);
-            return isMongoDBConnected;
-        }
-    } catch (error) {
-        console.log('MongoDB not available - using local data:', error.message);
     }
     
     isMongoDBConnected = false;
@@ -190,13 +120,19 @@ async function fetchProductsFromMongoDB(filters, page = 1) {
 
     // Add timeout to prevent hanging
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
     
     const response = await fetch(`${BACKEND_URL}/api/products/search?${params}`, {
       signal: controller.signal
     });
     
     clearTimeout(timeoutId);
+    
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Server did not return JSON');
+    }
     
     if (!response.ok) {
       throw new Error(`Server returned ${response.status}`);
@@ -323,7 +259,7 @@ function populateProductsGrid(products) {
         
         card.innerHTML = `
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300?text=Image+Not+Found'">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
             </div>
             <div class="product-content">
@@ -463,7 +399,6 @@ async function initializePage() {
     if (isMongoDBConnected) {
         await fetchProductsFromMongoDB(currentFilters, currentPage);
     } else {
-        // Use local data
         populateProductsGrid(babyProducts);
     }
 }
@@ -474,8 +409,3 @@ if (document.readyState === 'loading') {
 } else {
     initializePage();
 }
-// If DOM is already loaded, initialize immediately
-    if (document.readyState !== 'loading' && !window.appInitialized) {
-      window.appInitialized = true;
-      initializePage();
-    }
